@@ -3,7 +3,7 @@ import Product from './Product'
 
 const ProductFeed = ({products,rate}) => {
     return (
-        <div className="grid grid-flow-row-dense md:grid-cols-2 md:-mt-52 lg:grid-cols-3 xl:grid-cols-4">
+        <div className="grid grid-flow-row-dense md:grid-cols-2 md:-mt-30 lg:grid-cols-3 xl:grid-cols-4">
             {products.slice(0,4).map(({id,title,description,category,price,image,rating})=>(
                 <Product
                 key={id}
