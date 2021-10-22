@@ -2,10 +2,26 @@ import React,{useState} from 'react'
 import Image from 'next/image'
 import StarsRating from 'react-star-rate'
 import Currency from 'react-currency-formatter'
-import { async } from 'regenerator-runtime'
+import { addToBasket } from '../slices/basketSlice'
+import { useDispatch } from 'react-redux'
 
-const Product = ({id, title, price, description, category, image,rating,rate}) => {
+
+const Product = ({id, title, price, description, category, image,rating}) => {
     const [hasPrime]=useState(rating.rate>4);
+    const dispatch=useDispatch();
+
+    const addItemToBasket=()=>{
+        const product={
+            id,
+            title,
+            price,
+            description,
+            category,
+            image,
+            rating,
+        };
+        dispatch(addToBasket(product));
+    }
     return (
         <div className="relative flex flex-col m-5 bg-white z-30 p-10">
             <p className="absolute top-2 right-2 text-xs italic text-gray-400">{category}</p>
@@ -25,7 +41,7 @@ const Product = ({id, title, price, description, category, image,rating,rate}) =
             <p className="text-xs my-2 line-clamp-2">{description}</p>
             <div className="mb-5">
                 <Currency 
-                    quantity={(price*rate.result.NGN).toFixed()}
+                    quantity={(price * 412.198).toFixed()}
                     currency="NGN"
                 />
             </div>
@@ -35,7 +51,7 @@ const Product = ({id, title, price, description, category, image,rating,rate}) =
                     <p className="text-xs text-gray-500">FREE Next-day delivery</p>
                 </div>
             )}
-            <button className="mt-auto button">Add to Basket</button>
+            <button onClick={addItemToBasket} className="mt-auto button">Add to Basket</button>
         </div>
     )
 }

@@ -1,8 +1,15 @@
 import React from 'react'
 import Image from 'next/image'
 import {MenuIcon, SearchIcon, ShoppingCartIcon} from "@heroicons/react/outline"
+import { signIn, signOut, useSession } from "next-auth/client"
+import { useRouter } from 'next/dist/client/router'
+import { selectItems } from '../slices/basketSlice'
+import { useSelector } from 'react-redux'
 
 const Header = () => {
+    const [session]=useSession();
+    const router=useRouter();
+    const items=useSelector(selectItems);
     return (
         <header>
         {/* Top nav */}
@@ -14,6 +21,7 @@ const Header = () => {
             height={40}
             objectFit="contain"
             className="cursor-pointer"
+            onClick={()=>router.push('/')}
              />
             </div>
             {/* Search */}
@@ -23,16 +31,16 @@ const Header = () => {
             </div>
             {/* Right nav */}
             <div className="flex text-white space-x-6 text-xs items-center mx-6 whitespace-nowrap">
-                <div className="link">
-                <p>Hi Jamsanz</p>
+                <div className="link" onClick={()=>{!session ? signIn("google"): signOut();}}>
+                <p>{session ? `Hi ${session.user.name}`: `Sign In` }</p>
                 <p className="font-extrabold md:text-sm">Accounts & Lists</p>
                 </div>
                 <div className="link">
                 <p>Returns</p>
                 <p className="font-extrabold md:text-sm">& Orders</p>
                 </div>
-                <div className="link flex items-center relative">
-                <span className="absolute top-0 right-0 md:right-8 bg-yellow-400 rounded-full text-black font-bold h-4 w-4 text-center">0</span>
+                <div className="link flex items-center relative" onClick={()=>router.push('/checkout')}>
+                <span className="absolute top-0 right-0 md:right-8 bg-yellow-400 rounded-full text-black font-bold h-4 w-4 text-center">{items.length}</span>
                 <ShoppingCartIcon className="h-10"/>
                 <p className="hidden md:inline font-extrabold mt-2 md:text-sm">Cart</p>
                 </div>

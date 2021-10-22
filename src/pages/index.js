@@ -14,7 +14,7 @@ export default function Home({products,rate}) {
        {/* Banner */}
        <Banner />
        {/* ProductFeed */}
-       <ProductFeed products={products} rate={rate} />
+       <ProductFeed products={products} />
      </main>
     </div>
   );
@@ -22,11 +22,10 @@ export default function Home({products,rate}) {
 
 export const getServerSideProps= async ()=>{
   const products= await fetch('https://fakestoreapi.com/products').then(res=>res.json());
-  const rate= await fetch('https://api.fastforex.io/fetch-one?from=USD&to=NGN&api_key=da884fc356-4f9d2f4642-qykhyd').then(res=>res.json());
+  // const rate= await fetch(`https://api.fastforex.io/fetch-one?from=USD&to=NGN&api_key=${process.env.API_KEY}`).then(res=>res.json());
   return{
     props:{
-      products,
-      rate
+      products
     }
   }
 };

@@ -1,7 +1,7 @@
 import React from 'react'
 import Product from './Product'
 
-const ProductFeed = ({products,rate}) => {
+const ProductFeed = ({products}) => {
     return (
         <div className="grid grid-flow-row-dense md:grid-cols-2 md:-mt-40 lg:grid-cols-3 xl:grid-cols-4">
             {products.slice(0,4).map(({id,title,description,category,price,image,rating})=>(
@@ -13,8 +13,7 @@ const ProductFeed = ({products,rate}) => {
                 category={category}
                 price={price}
                 image={image}
-                rating={rating} 
-                rate={rate}
+                rating={rating}
                 />
             ))}
 
@@ -30,7 +29,6 @@ const ProductFeed = ({products,rate}) => {
                 price={price}
                 image={image}
                 rating={rating} 
-                rate={rate}
                 />
             ))}
             </div>
@@ -44,7 +42,6 @@ const ProductFeed = ({products,rate}) => {
                 price={price}
                 image={image}
                 rating={rating} 
-                rate={rate}
                 />
             ))}
         </div>
