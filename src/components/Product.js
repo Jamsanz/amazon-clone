@@ -41,7 +41,7 @@ const Product = ({id, title, price, description, category, image,rating}) => {
             <p className="text-xs my-2 line-clamp-2">{description}</p>
             <div className="mb-5">
                 <Currency 
-                    quantity={(price * 412.198).toFixed()}
+                    quantity={+(price * 412.198).toFixed()}
                     currency="NGN"
                 />
             </div>
